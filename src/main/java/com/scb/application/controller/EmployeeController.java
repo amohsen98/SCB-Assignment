@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/employees")
@@ -25,4 +27,32 @@ public class EmployeeController {
         EmployeeResponse createdEmployee = employeeService.createEmployee(employeeRequest);
         return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
     }
+    @PutMapping("/{id}")
+    @AdminOnly
+    public ResponseEntity<EmployeeResponse> updateEmployee(
+            @PathVariable Long id,
+            @Valid @RequestBody EmployeeRequest employeeRequest) {
+        EmployeeResponse updatedEmployee = employeeService.updateEmployee(id, employeeRequest);
+        return ResponseEntity.ok(updatedEmployee);
+    }
+
+    @DeleteMapping("/{id}")
+    @AdminOnly
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<EmployeeResponse>> getAllEmployees() {
+        List<EmployeeResponse> employees = employeeService.getAllEmployees();
+        return ResponseEntity.ok(employees);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EmployeeResponse> getEmployeeById(@PathVariable Long id) {
+        EmployeeResponse employee = employeeService.getEmployeeById(id);
+        return ResponseEntity.ok(employee);
+    }
+
 }
