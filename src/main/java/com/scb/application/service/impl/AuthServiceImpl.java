@@ -6,7 +6,7 @@ import com.scb.application.entity.Employee;
 import com.scb.application.exception.ApiException;
 import com.scb.application.exception.ErrorCode;
 import com.scb.application.repository.EmployeeRepository;
-import com.scb.application.security.JwtService;
+import com.scb.application.utils.JwtService;
 import com.scb.application.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

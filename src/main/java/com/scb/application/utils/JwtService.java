@@ -1,4 +1,4 @@
-package com.scb.application.security;
+package com.scb.application.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

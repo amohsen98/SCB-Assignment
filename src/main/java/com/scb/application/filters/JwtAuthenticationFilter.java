@@ -1,5 +1,6 @@
-package com.scb.application.security;
+package com.scb.application.filters;
 
+import com.scb.application.utils.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
