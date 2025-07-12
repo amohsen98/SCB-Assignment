@@ -1,10 +1,9 @@
 package com.scb.application.entity;
 
+import com.scb.application.enums.Role;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
 import java.util.Date;
 
 @Entity
@@ -12,6 +11,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Employee {
 
@@ -25,6 +25,13 @@ public class Employee {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
+
     @Column(name = "salary", nullable = false)
     private Double salary;
 
@@ -37,12 +44,12 @@ public class Employee {
     @ToString.Exclude
     private Department department;
 
-    // Constructor with fields
     public Employee(String name, String email, Double salary, Date hireDate, Department department) {
         this.name = name;
         this.email = email;
         this.salary = salary;
         this.hireDate = hireDate;
         this.department = department;
+        this.role = Role.USER; // Default role
     }
 }
