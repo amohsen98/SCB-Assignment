@@ -30,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             return new User(
                     employee.getEmail(),
                     employee.getPassword(),
-                    Collections.singletonList(new SimpleGrantedAuthority(employee.getRole().name()))
+                    Collections.singletonList(new SimpleGrantedAuthority(employee.getRole()))
             );
         } catch (UsernameNotFoundException e) {
             log.warn("CustomUserDetailsService: " + e.getMessage());

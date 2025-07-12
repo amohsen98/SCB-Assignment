@@ -44,19 +44,19 @@ public class AuthServiceImpl implements AuthService {
                         User.builder()
                                 .username(employee.getEmail())
                                 .password(employee.getPassword())
-                                .authorities(employee.getRole().name())
+                                .authorities(employee.getRole())
                                 .build(),
-                        employee.getRole().name()
+                        employee.getRole()
                 );
                 log.info("JWT token generated successfully for user: {}", employee.getEmail());
 
                 AuthResponse response = AuthResponse.builder()
                         .token(token)
                         .email(employee.getEmail())
-                        .role(employee.getRole().name())
+                        .role(employee.getRole())
                         .build();
 
-                log.info("Login successful for user: {} with role: {}", employee.getEmail(), employee.getRole().name());
+                log.info("Login successful for user: {} with role: {}", employee.getEmail(), employee.getRole());
                 return response;
             } else {
                 log.info("Authentication failed for user: {}", loginRequest.getEmail());

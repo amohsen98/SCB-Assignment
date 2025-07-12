@@ -1,7 +1,8 @@
 package com.scb.application.security;
 
-import com.scb.application.enums.Role;
+import com.scb.application.constants.RoleConstants;
 import com.scb.application.filters.JwtAuthenticationFilter;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,6 +35,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
@@ -57,7 +59,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(mvc.pattern("/auth/**")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll() // Allow H2 console access
-                .requestMatchers(mvc.pattern("/admin/**")).hasAuthority(Role.ADMIN.name())
+                .requestMatchers(mvc.pattern("/admin/**")).hasAuthority(RoleConstants.ADMIN)
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

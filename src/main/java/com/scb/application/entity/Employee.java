@@ -1,6 +1,6 @@
 package com.scb.application.entity;
 
-import com.scb.application.enums.Role;
+import com.scb.application.constants.RoleConstants;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,9 +28,8 @@ public class Employee {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private Role role;
+    private String role;
 
     @Column(name = "salary", nullable = false)
     private Double salary;
@@ -50,6 +49,6 @@ public class Employee {
         this.salary = salary;
         this.hireDate = hireDate;
         this.department = department;
-        this.role = Role.USER; // Default role
+        this.role = RoleConstants.USER; // Default role
     }
 }
