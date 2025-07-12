@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: scb-assignment
+    ports:
+      - "8080:8080"
+    environment:
+      - JWT_SECRET=404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      - DEFAULT_EMPLOYEE_PASSWORD=password
+    healthcheck:
+      test: ["CMD", "ps", "aux", "|", "grep", "java"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
